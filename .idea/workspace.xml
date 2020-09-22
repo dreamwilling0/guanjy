@@ -82,6 +82,9 @@
       <replace>ipcRenderer</replace>
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -104,6 +107,7 @@
     <option name="width" value="1388" />
     <option name="height" value="877" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -125,6 +129,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -174,12 +179,12 @@
       <updated>1599724229860</updated>
       <workItem from="1599724231196" duration="11163000" />
       <workItem from="1599788581799" duration="25007000" />
-      <workItem from="1600244864895" duration="13337000" />
+      <workItem from="1600244864895" duration="14014000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49507000" />
+    <option name="totallyTimeSpent" value="50184000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -193,7 +198,7 @@
   <component name="ToolWindowManager">
     <frame x="482" y="23" width="1388" height="877" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24945135" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24945135" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
