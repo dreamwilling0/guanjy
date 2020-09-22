@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>electron</title>
+
+</head>
+<body onload="onHtmlLoad()">
+<img src="assets/image/audio.png" alt="">
+<h2>书名：<i>《第一行代码：以台风》</i></h2>
+<br>
+<br>
+出版社：<u>水利出版社</u>
+<br>
+<br>
+原价：<strike>69</strike>元 促销价：59元
+
+<button onclick="onClick_GetSizePostion()">获取窗口尺寸</button>
+<button onclick="onClick_SetSizePostion()">设置窗口尺寸和位置</button>
+<hr>
+<button onclick="onClick_Change()" id="button">切换属性模式</button>
+<hr>
+<button onclick="onClick_Close()">关闭当前窗口</button>
+<button onclick="onClick_CreateMultiWindows()">创建新窗口</button>
+<button onclick="onClick_CloseAllWindows()">关闭所有窗口</button>
+<hr>
+<button onclick="onClick_SendData()">向新窗口传递数据</button>
+<label id="label_return"></label>
+
+<hr>
+<hr>
+<button onclick="onClick_OpenFile()">对话框-打开文件</button>
+<button onclick="onClick_CustomOpenFile()">对话框-打开定制文件</button>
+<button onclick="onClick_FileType()">对话框-选择文件类型</button>
+<button onclick="onClick_Directory()">选择目录</button>
+<button onclick="onClick_MultiSelection()">对话框-多选文件和目录</button>
+<button onclick="onClick_CallBack()">对话框-回调函数返回选择结果</button>
+<hr>
+<hr>
+<button onclick="onClick_Save()">保存对话框</button>
+<hr>
+<button onclick="onClick_MessageBox()">显示简单的消息对话框</button>
+<button onclick="onClick_MessageBoxIcon()">显示图标的消息对话框</button>
+<button onclick="onClick_MessageBoxType()">显示消息对话框类型</button>
+<button onclick="onClick_MessageBoxButton()">消息对话框-多个按钮</button>
+<button onclick="onClick_ErrorBox()">显示错误对话框</button>
+<hr>
+<button onclick="onClick_OpenChildWeb()">打开子窗口</button>
+
+<hr>
+<button onclick="onClick_OpenChildWeb()">打开子窗口</button>
+<button onclick="onClick_Focus()">获得焦点</button>
+<button onclick="onClick_Blur()">失去焦点</button>
+<button onclick="onClick_Closed()">关闭窗口</button>
+
+<button onclick="onClick_Print()">显示打印</button>
+<hr>
+<input type="text" id="data">
+<button onclick="onClick_SendMessage()">将数据传递给子窗口</button>
+<hr>
+<button onclick="onClick_Eval()">使用eval向子窗口传递数据</button>
+<label id="label"></label>
+
+<!--<iframe id="webview1" src="https://www.baidu.com" style="width: 400px; height: 300px" ></iframe>-->
+<button onclick="onClick_Screen()">获取屏幕尺寸和鼠标绝对坐标</button>
+
+<script type="text/javascript" src="./events.js"></script>
+</body>
+</html>
