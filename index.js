@@ -198,9 +198,9 @@ function createWindow() {
     })
 
     // childWin.loadFile('child.html')
-    if (process.platform != 'darwin') {
+    if (process.platform !== 'darwin') {
         // 设置windows和linux 左上角图标
-        win.setIcon('./image/audio')
+        win.setIcon('./assets/image/audio.png')
     }
     // win.setFullScreen(true)
     console.log('win.isFullScreen', win.isFullScreen()) // 判断是否全屏
