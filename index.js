@@ -1,4 +1,4 @@
-const { app,BrowserWindow, remote } = require('electron')
+const { app,BrowserWindow, remote, Menu, Tray } = require('electron')
 
 const path = require('path')
 /*
@@ -161,7 +161,86 @@ const path = require('path')
 *  console.log('y:' + remote.screen.getCursorScreenPoint().y)
 *
 *
+* //任务栏进度条
+* win.setProgressBar() ->仅限windows
+*
+* // 使用模版创建原生应用菜单
+* 1、应用菜单（窗口菜单）
+*
+* Windows、Linux和Mac OS X
+*（1）模版
+* 菜单类型
+* 1、normal：默认的菜单类型
+* 2、separator： 分割线
+* 3、submenu：子菜单
+* 4、checkbox：多选菜单
+* 5、radio：单选菜单
+*
+* 为菜单项添加图标 -> icon设置图标 ->图标会按原尺寸显示 16*16最好
+* windows -> ico
+* 其他系统 -> png
+*（2）代码
+*   electron-packager
+*   dmg, exe
+*   npm install electron-packager -g
+*
+* 2、上下文菜单
+*var customMenu = new Menu()
+function onClick_AllOriginMenu () {
+    const menu = new Menu()
+    var icon = ''
+    if (process.platform === 'win32') {
+        icon = './assets/image/favicon.ico'
+    } else {
+        icon = './assets/image/video.png'
+    }
+    var menuitemOpen = new MenuItem({label: '打开', icon: icon})
+    var menuitemSave = new MenuItem({label: '保存', click: saveClick})
+    var menuitemFile = new MenuItem({label: '文件', submenu: [menuitemOpen, menuitemSave]})
+
+    menuitemCustom = new MenuItem({label: '定制菜单', submenu: customMenu})
+    menu.append(menuitemFile)
+    menu.append(menuitemCustom)
+    Menu.setApplicationMenu(menu)
+}
+// 动态添加菜单
+function onClick_AddMenuItem () {
+    var type = 'normal'
+    if (radio.checked) {
+        type = 'radio'
+    } else {
+        type = 'checkbox'
+    }
+    customMenu.append(new MenuItem({label: menuitem.value, type: type}))
+    menuitem.value = ''
+    radio.checked = false
+    checkbox.checked = false
+
+    Menu.setApplicationMenu(Menu.getApplicationMenu())
+}
+*
+* // 托盘应用
+*  Tray
+*  tray = new Tray('./assets/image/favicon.png')
+    // 为托盘图标添加上下文菜单
+    contextMenu = Menu.buildFromTemplate([
+        {label: '复制', role: 'copy'},
+        {label: '粘贴', role: 'paste'},
+        {label: '剪切', role: 'cut'},
+        {label: '关闭', accelerator: 'Command+Q', click: ()=> {win.close()}}
+    ])
+    tray.setToolTip('这是一个托盘应用')
+    tray.setContextMenu(contextMenu)
+    *
+    * 托盘事件
+    *
+*
 * */
+
+let tray
+let contextMenu
+let tray1
+let tray2
 function createWindow() {
     // 父窗口
     win = new BrowserWindow({
@@ -185,8 +264,9 @@ function createWindow() {
         // kiosk: true -> 锁屏
     })
     // win.setRepresentedFilename('')
-    // 创建子窗口
 
+
+    // 创建子窗口
     childWin = new BrowserWindow({
         parent: win,
         show: false,
@@ -196,12 +276,151 @@ function createWindow() {
         y: 80,
         // modal: true
     })
+    let icon = ''
+    if (process.platform === 'win32') {
+        icon = './assets/image/favicon.ico'
+    } else {
+        icon = './assets/image/video.png'
+    }
+    console.log(icon)
+    // 定义菜单模版
+    const template = [
+        {label: '文件', submenu: [
+                {
+                    label: '关于',
+                    role: 'about', // Mac
+                    click: () => {
+                        var aboutWin = new BrowserWindow({
+                            width: 200,
+                            height: 300,
+                            parent: win,
+                            modal: true
+                        })
+                        aboutWin.loadURL('https://www.baidu.com')
+                    }
+                }, {
+                    type: 'separator'
+                }, {
+                    label: '关闭',
+                    accelerator: 'Command+Q',
+                    click: ()=> {win.close()}
+                },
+            ]
+        },
+        {label: '编辑', submenu: [
+                {
+                    label:'复制',
+                    click: ()=> {win.webContents.insertText('复制')}
+                },
+                {
+                    label:'剪切',
+                    click: ()=> {win.webContents.insertText('剪切')}
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label:'查找',
+                    accelerator: 'Command+F',
+                    click: ()=> {win.webContents.insertText('查找')}
+                },
+                {
+                    label:'替换',
+                    accelerator: 'Command+R',
+                    click: ()=> {win.webContents.insertText('替换')}
+                },
+            ]},
+        {label: '设置', submenu: []},
+        {
+            label: '功能',
+            submenu: [{
+                role: 'undo',
+                label: '撤销'
+            }, {
+                role: 'redo',
+                label: '重做'
+            }, {
+                role: 'cut',
+                label: '剪切'
+            }, {
+                role: 'copy',
+                label: '复制'
+            }, {
+                role: 'paste',
+                label: '粘贴'
+            }]
+        },
+        {
+            label: '调试',
+            submenu: [{
+                role: 'toggleDevTools',
+                label: '显示调试工具'
+            }]
+        },
+        {
+            label: '窗口',
+            submenu: [{
+                role: 'toggleFullScreen',
+                label: '全屏显示窗口',
+                icon: icon
+            }, {
+                role: 'zoomIn',
+                label: '窗口放大10%',
 
+            }, {
+                role: 'zoomOut',
+                label: '窗口缩小10%'
+            }]
+        },
+        {
+            label: '我的菜单',
+            submenu: [{
+                label: '多选1',
+                type: 'checkbox'
+            }, {
+                label: '多选2',
+                type: 'checkbox'
+            }, {
+                label: '多选3',
+                type: 'checkbox'
+            }, {
+                type: 'separator'
+            },{
+                label: '单选1',
+                type: 'radio'
+            }, {
+                label: '单选2',
+                type: 'radio'
+            }, {
+                label: 'windos',
+                type: 'submenu',
+                role: 'WindowMenu'
+            }]
+        }
+    ]
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
     // childWin.loadFile('child.html')
-    if (process.platform !== 'darwin') {
+    if (process.platform !== 'darwin') { // 不等于苹果系统
         // 设置windows和linux 左上角图标
         win.setIcon('./assets/image/audio.png')
     }
+    if (process.platform === 'darwin') {
+        template.unshift({
+            label: "Mac",
+            submenu: [{
+                label: '关于',
+                role: 'about'
+            }, {
+                label: '开始说话',
+                role: 'starSpeaking'
+            }, {
+                label: '停止说话',
+                role: 'stopSpeaking'
+            }]
+        })
+    }
+
     // win.setFullScreen(true)
     console.log('win.isFullScreen', win.isFullScreen()) // 判断是否全屏
     win.webContents.openDevTools() // 默认打开调试窗口

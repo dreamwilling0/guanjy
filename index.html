@@ -63,6 +63,23 @@
 
 <!--<iframe id="webview1" src="https://www.baidu.com" style="width: 400px; height: 300px" ></iframe>-->
 <button onclick="onClick_Screen()">获取屏幕尺寸和鼠标绝对坐标</button>
+<textarea id="textarea" style="width: 400px; height: 200px"></textarea>
+<hr>
+<button onclick="onClick_AllOriginMenu()">添加最初的菜单</button>
+
+<p>菜单文本：<input type="text" id="menuitem"></p>
+<p><input name="radio" type="radio" id="radio">单选</p>
+<p><input name="radio" type="radio" id="checkbox">多选</p>
+
+<button onclick="onClick_AddMenuItem()">动态添加菜单</button>
+<div id="panel" style="background-color: coral; width: 200px; height: 100px"></div>
+<p><button onclick="onClick_AddTray()">添加托盘图标</button></p>
+<p><button onclick="onClick_SetIcon()">设置托盘动态图标</button></p>
+<p><button onclick="onClick_SetTitle()">设置托盘动态标题（只支持mac）</button>
+<button onclick="onClick_SetPressedimage()">设置托盘按下显示的图标（Mac）</button></p>
+<button onclick="onClick_SetTooltip()">设置托盘提示文本</button>
+<button onclick="onClick_RemoveTray()">移除托盘图标</button>
+<button onclick="onClick_DisplayBalloon()">显示气泡（only Windows）</button>
 
 <script type="text/javascript" src="./events.js"></script>
 </body>
